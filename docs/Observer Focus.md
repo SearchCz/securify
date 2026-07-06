@@ -117,4 +117,4 @@ Together, these three responsibilities allow observers to remain simple, predict
 
 ### See Also:
 - [Observer Authority](Observer%20Authority.md)
-- [Observer Responses](Obserever%20Responses.md)
+- [Observer Responses](Observer%20Responses.md)
