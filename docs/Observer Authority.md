@@ -160,4 +160,4 @@ The result is a home that remains continuously aware while respecting the homeow
 
 ### See Also:
 - [Observer Focus](Observer%20Focus.md)
-- [Observer Responses](Obserever%20Responses.md)
+- [Observer Responses](Observer%20Responses.md)
