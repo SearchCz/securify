@@ -20,4 +20,4 @@ An activated observer simply indicates that its observed condition is present. W
 
 Because observers are Indigo devices, their activation can also be used by homeowner-created triggers, conditions, and Action Groups, making them useful as semantic building blocks throughout an Indigo automation system.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
