@@ -47,7 +47,7 @@
         </Field>
 
         <Field id="label1b" type="label" alignText="left">
-            <Label>* Determines which cumulative security condition activates this observer.</Label>
+            <Label>* Determines which security condition activates this observer.</Label>
         </Field>
 
         <Field id="focusTarget"
@@ -60,7 +60,7 @@
         <Field id="focusActivator"
             type="menu"
             defaultValue="">
-            <Label>... and activates when Exposure Index Classification shows:</Label>
+            <Label>... and activates when Exposure shows:</Label>
             <List>
                 <Option value="">----------------</Option>
                 <Option value="allclear">[00] All Clear</Option>

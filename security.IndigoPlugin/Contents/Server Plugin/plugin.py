@@ -137,7 +137,6 @@ class Plugin(indigo.PluginBase):
 
 
 
-#        self.debugLog(f"getting exposure mesage for observer {observerName} classification {classification} alert score {alertScore}")
 
         exposureMessages = {
             "allclear": (
@@ -274,7 +273,7 @@ class Plugin(indigo.PluginBase):
         ]
 
         if self.roomifyCooperationEnabled:
-            self.debugLog("Roomify cooperation is in force")
+            self.logIntegration("Roomify cooperation is in force")
             menu.append (("OCCUPANCY", "Roomify Occupancy" ))
 
         return menu
@@ -325,7 +324,7 @@ class Plugin(indigo.PluginBase):
         if self.roomifyCooperationEnabled:
             newMode = action.pluginTypeId.removeprefix("set").removesuffix("Suggested").upper()
             self.suspendCrossTalk = True
-            self.integrationLog(f"Accepting suggested house mode {newMode}")
+            self.logIntegration(f"Accepting suggested house mode {newMode}")
             self.setHouseMode(newMode)
         self.suspendCrossTalk = False
 
@@ -416,7 +415,7 @@ class Plugin(indigo.PluginBase):
         humanTime = datetime.datetime.fromtimestamp(now).strftime("%Y-%m-%d %H:%M:%S")
         observers = indigo.devices.iter("self.securifyObserver")
         for observer in observers:
-            self.deviceLog(f"Publishing to observer {observer.name}")
+            self.logObserver(f"Publishing to observer {observer.name}")
             self.publishToObserver(observer,humanTime)
 
     def publishToObserverDeprecated(self, observer, now):
@@ -488,7 +487,7 @@ class Plugin(indigo.PluginBase):
             compromisedCheckpoints)
 
         if observer.pluginProps.get("log"):
-            self.deviceLog(notification)
+            self.logIt(notification)
 
         if observer.pluginProps.get("announce"):
             indigo.server.speak(notification)
@@ -513,7 +512,6 @@ class Plugin(indigo.PluginBase):
 
         if observer.pluginProps.get("email"):
             #CZEWSKI
-            #self.debugLog(compromisedCheckpoints)
             emailTo = observer.pluginProps.get("emailTo")
             emailCC = observer.pluginProps.get("emailCC")
             emailBCC = observer.pluginProps.get("emailBCC")
@@ -549,7 +547,7 @@ class Plugin(indigo.PluginBase):
         email_plugin = indigo.server.getPlugin("com.indigodomo.email")
 
         if not email_plugin:
-            self.errorLog("Email+ plugin not found.")
+            self.logResponse("Email+ plugin not found.","error")
             return
 
         self.logResponse(f"eamil attempt to {emailTo} cc {emailCC}  via {emailDevice}")
@@ -713,18 +711,6 @@ class Plugin(indigo.PluginBase):
         self.logIntegrations = self.pluginPrefs.get("logIntegrations", True)
         self.logOthers = self.pluginPrefs.get("logOthers", True)
 
-        self.verboseLogging = self.pluginPrefs.get(
-            "verboseLogging", True)
-
-        self.heartbeatLogging = self.pluginPrefs.get(
-            "heartbeatLogging", False)
-
-        self.deviceEventLogging = self.pluginPrefs.get(
-            "deviceEventLogging", True)
-
-        self.errorLogging = self.pluginPrefs.get(
-            "errorLogging", True)
-        
         self.houseMode = self.pluginPrefs.get(
             "houseMode")
 
@@ -766,8 +752,8 @@ class Plugin(indigo.PluginBase):
             )
 
         except Exception as e:
-            self.debugLog(
-                f"Roomify security update skipped (likely unsupported Roomify version or missing action): {e}"
+            self.logIntegration(
+                f"Roomify security update skipped (likely unsupported Roomify version or missing action): {e}","error"
             )        
 
     def fetchRoomifyHouseMode(self):
@@ -796,7 +782,7 @@ class Plugin(indigo.PluginBase):
     def getRoomifyHouseMode(self):
         for dev in indigo.devices.iter("com.searchcz.roomify.roomifyObserver"):
             newMode = dev.states.get("houseMode")
-            indigo.server.log(f"Obaerv:{dev.name} mode:{newMode}")
+            self.logIntegration(f"Obaerv:{dev.name} mode:{newMode}")
             return newMode
             break
 
@@ -836,7 +822,7 @@ class Plugin(indigo.PluginBase):
             self.watchfulness = self.getWatchfulness()
             self.recomputeAllCheckpoints()
 
-    def debugLog(self, message):
+    def debugLoX(self, message):
         now = time.time()
         formatted = time.strftime("%H:%M:%S", time.localtime(now))
 
@@ -844,7 +830,7 @@ class Plugin(indigo.PluginBase):
             self.logger.info("@" + formatted + ": " + message)
 
 
-    def heartbeatLog(self, message):
+    def heartbeatLoX(self, message):
         now = time.time()
         formatted = time.strftime("%H:%M:%S", time.localtime(now))
 
@@ -852,7 +838,7 @@ class Plugin(indigo.PluginBase):
             self.logger.info("@" + formatted + ": " + message)
 
 
-    def deviceLog(self, message):
+    def deviceLoX(self, message):
         now = time.time()
         formatted = time.strftime("%H:%M:%S", time.localtime(now))
 
@@ -860,7 +846,7 @@ class Plugin(indigo.PluginBase):
             self.logger.info("@" + formatted + ": " + message)
 
 
-    def errorLog(self, message):
+    def errorLoX(self, message):
         now = time.time()
         formatted = time.strftime("%H:%M:%S", time.localtime(now))
 
@@ -869,8 +855,8 @@ class Plugin(indigo.PluginBase):
 
     def deviceStartComm(self, device):
         device.stateListOrDisplayStateIdChanged()
-        self.debugLog(
-            f"[Securify DEBUG] starting checkpoint: {device.name}")
+        self.logCheckpoint(
+            f"Starting checkpoint: {device.name}")
 
         device.stateListOrDisplayStateIdChanged()
 
@@ -881,7 +867,7 @@ class Plugin(indigo.PluginBase):
 
         if origDev.pluginProps != newDev.pluginProps:
 
-            self.debugLog(
+            self.logOther(
                 f"[Securify DEBUG] config updated: {newDev.name}")
 
             if newDev.deviceTypeId in ["securifyCheckpoint"]:
@@ -892,17 +878,17 @@ class Plugin(indigo.PluginBase):
         if not (self.verboseLogging):
             return
         
-        indigo.server.log(f"=== {title} ===")
+        indigo.logIt(f"=== {title} ===")
 
         for key, value in d.items():
-            indigo.server.log(f"{key}: {value}")
+            self.logIt(f"{key}: {value}")
 
-        indigo.server.log("================")
+        self.logIt("================")
 
     
 
     def evaluateAllCheckpoints(self):
-        self.deviceLog("Evaluating All Checkpoints")
+        self.logCheckpoint("Evaluating All Checkpoints")
         checkpoints = indigo.devices.iter("self.securifyCheckpoint")
         for checkpoint in checkpoints:
             self.evaluateCheckpoint(checkpoint)        
@@ -1143,7 +1129,6 @@ class Plugin(indigo.PluginBase):
 
 
     def isVulnerable(self,sensorId):
-        #self.debugLog(f"Evaluating Sensor ID [{sensorId}]")    
         if sensorId:
             if sensorId == "none":
                 return False
@@ -1262,7 +1247,6 @@ class Plugin(indigo.PluginBase):
                     self.configStable = True
                     if self.configChangedDeviceId:
                         checkpoint = indigo.devices[self.configChangedDeviceId]
-                        self.debugLog(f"DEVID {self.configChangedDeviceId} is unstable?")
                         self.evaluateCheckpoint(checkpoint)
                         self.updateHouseCheckpoint()
                     else:
@@ -1298,7 +1282,7 @@ class Plugin(indigo.PluginBase):
             vulnerabilityScore = checkpoint.get("vulnerabilityScore")
             self.logHeartbeat(f"Considering escalation of checkpoint {name} with vulnerability {vulnerabilityScore}")
             if (vulnerabilityScore == 0) or (vulnerabilityScore == "0"):
-                self.debugLog("--> Not vulnerable = not escalated")
+                self.logCheckpoint("--> Not vulnerable = not escalated")
                 continue
 
             escalationRate = checkpoint.get("escalationRate")
@@ -1317,7 +1301,7 @@ class Plugin(indigo.PluginBase):
 
 
     def dumpCheckpointCache(self):
-        self.deviceLog("---- Securify Checkpoints Cache ----")
+        self.logIt("---- Securify Checkpoints Cache ----")
 
         for checkpointId, checkpoint in self.checkpoints.items():
             self.dumpCheckpoint(checkpoint)
@@ -1368,7 +1352,7 @@ class Plugin(indigo.PluginBase):
             old_auth = origDev.states.get("responseAuthorized")
             new_auth = newDev.states.get("responseAuthorized")
             auth_change_reported = ( old_auth != new_auth )
-            self.debugLog(f"Authorization was {old_auth} and is now {new_auth} so change detection says {auth_change_reported}")
+            self.logHeartbeat(f"Authorization was {old_auth} and is now {new_auth} so change detection says {auth_change_reported}")
         return auth_change_reported
 
     def repeatChangeReported(self, origDev, newDev):
@@ -1539,7 +1523,7 @@ class Plugin(indigo.PluginBase):
                 if not self.isOn(indigo.devices[observerId]):
                     indigo.device.turnOn(observerId)
             else:
-                self.debugLog("!!! - Observer Conditions Not Met")
+                self.logObserver("Observer Conditions Not Met")
                 indigo.device.turnOff(observerId)
 
     def observerCaresAboutCheckpoint(self, observer, checkpointId):
@@ -1666,7 +1650,7 @@ class Plugin(indigo.PluginBase):
             self.updateHouseCheckpoint()
 
         except Exception as e:
-            self.errorLog(f"[SECURIFY ERROR] deviceUpdated: {e}")        
+            self.logCheckpoint(f"[SECURIFY ERROR] deviceUpdated: {e}","error")        
 
     def evaluateCheckpoint(self, checkpoint):
 
@@ -1759,12 +1743,12 @@ class Plugin(indigo.PluginBase):
 
         self.cacheCheckpoint(checkpoint)
 
-        self.debugLog("Roomify cooperation is in force")
+        self.logIntegration("Roomify cooperation is in force")
         if self.roomifyCooperationInForce:
             roomId = checkpoint.pluginProps.get("roomifyRoomId")
-            self.debugLog(f"Roomify Cooperation is in force, checkpoint {checkpoint.name} has roomId {roomId}")
+            self.logIntegration(f"Roomify Cooperation is in force, checkpoint {checkpoint.name} has roomId {roomId}")
             if roomId and roomId != "none":
-                self.debugLog("Setting Roomify Security States")
+                self.logIntegration("Setting Roomify Security States")
                 self.setRoomifySecurityStates(
                     roomId, 
                     alertScore, 
@@ -1927,10 +1911,10 @@ class Plugin(indigo.PluginBase):
         email_plugin = indigo.server.getPlugin("com.indigodomo.email")
 
         if not email_plugin:
-            self.errorLog("... Email+ plugin not found.")
+            self.logResponse("... Email+ plugin not found.")
             return
 
-        self.debugLog(f"... eamil attempt to {emailTo} cc {emailCC}  via {emailDevice}")
+        self.logResponse(f"... eamil attempt to {emailTo} cc {emailCC}  via {emailDevice}")
 
         try:
             props = {
@@ -1947,7 +1931,7 @@ class Plugin(indigo.PluginBase):
             )
 
         except Exception as e:
-            self.errorLog(f"... unable to send Email+ notification: {e}")
+            self.logResponse(f"... unable to send Email+ notification: {e}","error")
 
 
     def recomputeAllCheckpoints(self):
@@ -1993,7 +1977,7 @@ class Plugin(indigo.PluginBase):
         self.logHeartbeat(f"Observer:{name} just completed response#  {repeatCount} of {repeatMax}")
 
         if ( not repeat ) or ( repeatCount == repeatMax ):
-            self.heartbeatLog(f"Repeat limit hit for {name}")
+            self.logHeartbeat(f"Repeat limit hit for {name}")
             observer["repeatScheduledEopch"] = 0
 
         if ( repeatCount >= repeatMax ) or (not repeat) :
@@ -2041,7 +2025,7 @@ class Plugin(indigo.PluginBase):
         repeatCount = int(observer.get("repeatCount"))
         repeatMax = int(observer.get("repeatMax"))
         try:
-            self.heartbeatLog(f"--> issuing a reminder for observer {observer.get("name")}")
+            self.logHeartbeat(f"--> issuing a reminder for observer {observer.get("name")}")
             # self.dumpObserver(observer)
             dev = indigo.devices[int(observerId)]
             if dev:
@@ -2085,7 +2069,7 @@ class Plugin(indigo.PluginBase):
         if oldAuth == responseAuthorized:
             self.logHeartbeat("--> Observer authorization is unchanged")
         else:
-            self.deviceLog(f"--> Observer authorization changing from {oldAuth} to {responseAuthorized}")
+            self.logHeartbeat(f"--> Observer authorization changing from {oldAuth} to {responseAuthorized}")
             observer["responseAuthorized"] = responseAuthorized
             observerDev.updateStateOnServer("responseAuthorized", responseAuthorized)
             #device got updated, so deviceUpdated nshould kick in ?
@@ -2115,22 +2099,16 @@ class Plugin(indigo.PluginBase):
 
     def push(self, msgTitle,msgBody,msgSound,msgPriority,msgDevice):
 
-        indigo.server.log("Title:" + msgTitle)
-        indigo.server.log("Body:" + msgBody)
-        indigo.server.log("Sound:" + msgSound)
-        indigo.server.log("Priority:" + str(msgPriority))
-        indigo.server.log("Device:" + msgDevice)
-
         alertPlugin = indigo.server.getPlugin('io.thechad.indigoplugin.pushover')
         if alertPlugin.isEnabled():
             try:
                 alertProps = {'msgTitle':msgTitle, 'msgBody':msgBody, 'msgSound':msgSound, 'msgPriority':msgPriority, 'msgDevice':msgDevice, 'msgSupLinkUrl':'', 'msgSupLinkTitle':'','appToken':'ayxvb194vn466qbqj3caemvmrfuaje'} 
                 alertPlugin.executeAction("send", props=alertProps)
-                self.debugLog(f"Pushover send: {alertProps}")
+                self.logResponse(f"Pushover send: {alertProps}")
             except:
-              indigo.server.log('Message send error', isError=True)
+              self.logResponse('Message send error', 'error')
         else:
-            indigo.server.log('Pushover plugin not available', isError=True)
+            self.logResponse('Pushover plugin not available','error')
 
 # ----------------------------------------------------------------------------------------------------------- #
 #                                                                                                             #

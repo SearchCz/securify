@@ -273,7 +273,7 @@
 
     <Field id="loggingEnabled"
         type="checkbox"
-        defaultValue="false">
+        defaultValue="true">
         <Label>LOGGING ENABLED:</Label>
     </Field>
 
@@ -318,7 +318,7 @@
            type="checkbox"
         visibleBindingId="loggingEnabled"
         visibleBindingValue="true"
-           defaultValue="false">
+           defaultValue="true">
         <Label> → Log Errors: </Label>
     </Field>
 
@@ -336,48 +336,6 @@
         visibleBindingValue="true"
            defaultValue="false">
         <Label> → Log Others: </Label>
-    </Field>
-
-
-    <Field id="label_describe_logging" type="label" 
-        alignWithControl="false">
-        <Label>Select desired logging detail..</Label>
-    </Field>
-
-
-    <Field id="sep_logging2.0" type="separator"/>
-
-
-    <Field id="verboseLogging"
-           type="checkbox"
-        visibleBindingId="loggingEnabled"
-        visibleBindingValue="true"
-           defaultValue="false">
-        <Label>Verbose Logging Enabled</Label>
-    </Field>
-
-    <Field id="heartbeatLogging"
-           type="checkbox"
-        visibleBindingId="loggingEnabled"
-        visibleBindingValue="true"
-           defaultValue="false">
-        <Label>Heartbeat Logging Enabled</Label>
-    </Field>
-
-    <Field id="deviceEventLogging"
-           type="checkbox"
-        visibleBindingId="loggingEnabled"
-        visibleBindingValue="true"
-           defaultValue="false">
-        <Label>Device Event Logging Enabled</Label>
-    </Field>
-
-    <Field id="errorLogging"
-           type="checkbox"
-        visibleBindingId="loggingEnabled"
-        visibleBindingValue="true"
-           defaultValue="true">
-        <Label>Error Logging Enabled</Label>
     </Field>
 
 
