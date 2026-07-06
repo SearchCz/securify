@@ -258,7 +258,7 @@ Because Brightness is published as the state of an Indigo device, homeowners may
 ![](images/SecurifyLogo200.png)
 
 ### See Also:
-- [Observers](docs/Observer%20Overview.md)
-  - [Observer Focus](docs/Observer%20Focus.md)
-  - [Observer Authority](docs/Observer%20Authority.md)
-  - [Observer Responses](docs/Obserever%20Responses.md)
+- [Observers](Observer%20Overview.md)
+  - [Observer Focus](Observer%20Focus.md)
+  - [Observer Authority](Observer%20Authority.md)
+  - [Observer Responses](Obserever%20Responses.md)
