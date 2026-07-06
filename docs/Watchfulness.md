@@ -110,3 +110,6 @@ Watchfulness provides the context that allows the same physical condition to be 
 It is one of the defining ideas behind Securify’s awareness-driven design.
 
 ![](/docs/images/SecurifyLogo200.png)
+
+### See Also:
+[Checkpoints](Checkpoints.md)
