@@ -127,4 +127,4 @@ Together they allow Securify to continuously interpret the home while ensuring t
 ### See Also:
 - [Observer Focus](Observer%20Focus.md)
 - [Observer Authority](Observer%20Authority.md)
-- [Observer Responses](Obserever%20Responses.md)
+- [Observer Responses](Observer%20Responses.md)
