@@ -161,4 +161,4 @@ Together, they move the smart home away from simple device reaction and toward a
 
 Everything else follows from those principles.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
