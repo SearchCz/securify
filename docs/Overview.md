@@ -36,6 +36,9 @@ How important is this particular door?
 
 Securify continuously answers those questions.
 
+![](images/SecurifyPoster.png)
+
+
 ---
 
 # **Checkpoints**
