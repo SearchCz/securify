@@ -1,7 +1,6 @@
-# security
 # **Securify**
 
-![[SecurifyBanner.png]]
+![[docs/images/SecurifyBanner.png]]
 
 **Awareness-driven home monitoring for Indigo Domotics**
 
