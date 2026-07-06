@@ -121,3 +121,10 @@ Checkpoints determine the significance of changing conditions.
 Observers determine which of those conditions deserve attention.
 
 Together they allow Securify to continuously interpret the home while ensuring that responses remain consistent with the homeowner’s priorities.
+
+![](images/SecurifyLogo200.png)
+
+### See Also:
+- [Observer Focus](Observer%20Focus.md)
+- [Observer Authority](Observer%20Authority.md)
+- [Observer Responses](Obserever%20Responses.md)
