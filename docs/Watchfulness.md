@@ -35,7 +35,7 @@ Every homeowner has different expectations, and every home has different routine
 
 # **Opinionated Defaults**
 
-Securify includes a set of sensible default Watchfulness levels.
+Securify includes a set of sensible default Watchfulness levels.  
 
 These defaults reflect a common expectation that:
 
