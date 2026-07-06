@@ -152,4 +152,4 @@ Observers decide when a response is appropriate.
 
 Responses simply deliver the message.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
