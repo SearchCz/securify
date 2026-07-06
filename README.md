@@ -6,7 +6,7 @@
 
 A smart home should do more than react to devices.
 
-It should understand the people who live there, adapt to their priorities, and keep them aware of the conditions that matter.
+It should understand the priorities of the  people who live there, adapt to changing conditions in the home, and keep them aware of the conditions that matter.
 
 That philosophy places the homeowner—not the automation—at the center of the system.
 
@@ -34,7 +34,7 @@ Unexpected motion while the home should be empty.
 
 None of these situations necessarily requires an alarm, but each may warrant awareness depending on your priorities, the current state of your home, and how long the condition has persisted.
 
-Securify continuously interprets the home’s condition so that you can decide what deserves your attention.
+Securify continuously interprets the home’s condition so that you can direct your attention where it is needed.
 
 ---
 
@@ -107,9 +107,9 @@ Roomify helps the home understand how it should behave.
 
 Securify helps the homeowner understand when something deserves attention.
 
-Together they create a home that both adapts to its occupants and remains aware of conditions that matter.
+Together they create a home that both adapts to its occupants and raises awareness of conditions that matter.
 
-Neither plugin depends on the other, but when both are installed they cooperate by sharing information such as House Mode and occupancy, allowing each plugin to make better decisions.
+Neither plugin depends on the other, but when both are installed they can cooperate by sharing information such as House Mode and occupancy, allowing each plugin to make better decisions.
 
 ---
 ## **Philosophy**
