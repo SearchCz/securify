@@ -138,4 +138,4 @@ Response determines how the homeowner is informed.
 
 Together, these three responsibilities allow observers to remain simple, predictable, and highly reusable.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
