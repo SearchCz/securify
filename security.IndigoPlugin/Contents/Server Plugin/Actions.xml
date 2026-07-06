@@ -1,0 +1,86 @@
+<Actions>
+
+    <Action id="evaluateAll" uiPath="Checkpoint Actions">
+        <Name>Evaluiate All Checkpoints</Name>
+        <CallbackMethod>evaluateAllX</CallbackMethod>
+    </Action>
+
+    <Action id="setMorning" uiPath="Set House Mode">
+        <Name>Set House Mode to Morning</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setDay" uiPath="Set House Mode">
+        <Name>Set House Mode to Day</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setEvening" uiPath="Set House Mode">
+        <Name>Set House Mode to Evening</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setNight" uiPath="Set House Mode">
+        <Name>Set House Mode to Night</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setSleep" uiPath="Set House Mode">
+        <Name>Set House Mode to Sleep</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setCleaning" uiPath="XTALK">
+        <Name>Set House Mode to Cleaning</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setAway" uiPath="XTALK">
+        <Name>Set House Mode to Away</Name>
+        <CallbackMethod>setHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setMorningSuggested" uiPath="XTALK">
+        <Name>Set House Mode to Morning</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setDaySuggested" uiPath="XTALK">
+        <Name>Set House Mode to Day</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setEveningSuggested" uiPath="XTALK">
+        <Name>Set House Mode to Evening</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setNightSuggested" uiPath="XTALK">
+        <Name>Set House Mode to Night</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setSleepSuggested" uiPath="XTALK">
+        <Name>Set House Mode to Sleep</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setCleaningSuggested" uiPath="XTALK">
+        <Name>Set House Mode to Cleaning</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+    <Action id="setAwaySuggested" uiPath="XTALK">
+        <Name>Set House Mode to Away</Name>
+        <CallbackMethod>considerHouseModeX</CallbackMethod>
+    </Action>
+
+
+    <Action id="shareHouseMode">
+        <Name>Share House Mode</Name>
+        <CallbackMethod>shareHouseModeX</CallbackMethod>
+    </Action>
+
+
+</Actions>
+

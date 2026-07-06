@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PluginConfig>
+
+    <Field id="defaultHouseMode"
+           type="menu"
+           defaultValue="DAY"
+           alignWithControl="true">
+        <Label>Default House Mode @ Startup</Label>
+
+        <List>
+            <Option value="MORNING">Morning</Option>
+            <Option value="DAY">Day</Option>
+            <Option value="AFTERNOON">Afternoon</Option>
+            <Option value="EVENING">Evening</Option>
+            <Option value="NIGHT">Night</Option>
+            <Option value="MEDIA">Media</Option>
+            <Option value="CLEANING">Cleaning</Option>
+            <Option value="SLEEP">Sleep</Option>
+            <Option value="AWAY">Away</Option>
+        </List>
+    </Field>
+
+    <Field id="watchfulness"
+        type="menu"
+        defaultValue="HOUSE">
+        <Label>Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+            <Option value="HOUSE">House Mode Determined</Option>
+        </List>
+    </Field>
+
+    <Field id="watchfulnessExplanation"
+        type="label"
+        alignWithControl="true">
+        <Label>Select "House Mode Determined" to automate dynamic watchfulness.</Label>
+    </Field>
+
+    <Field id="customWatchfulness"
+        type="checkbox"
+        defaultValue="false"
+        visibleBindingId="watchfulness"
+        visibleBindingValue="HOUSE">
+        <Label>Customize House Mode Watchfulness</Label> 
+    </Field>
+
+    <Field id="morningWatchfulness"
+        type="menu"
+        defaultValue="50"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>MORNING Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="dayWatchfulness"
+        type="menu"
+        defaultValue="50"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>DAY Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="eveningWatchfulness"
+        type="menu"
+        defaultValue="75"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>EVENING Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="nightWatchfulness"
+        type="menu"
+        defaultValue="75"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>NIGHT Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="bedtimeWatchfulness"
+         type="menu"
+        defaultValue="90"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>BEDTIME Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="sleepWatchfulness"
+        type="menu"
+        defaultValue="90"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>SLEEP Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="awayWatchfulness"
+        type="menu"
+        defaultValue="100"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>AWAY Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="cleaningWatchfulness"
+        type="menu"
+        defaultValue="10"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>CLEANING Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+    <Field id="quietWatchfulness"
+        type="menu"
+        defaultValue="50"
+        visibleBindingId="customWatchfulness"
+        visibleBindingValue="true">
+        <Label>QUIET Mode Watchfulness</Label>
+        <List>
+            <Option value="0">Standby</Option>
+            <Option value="10">Low-</Option>
+            <Option value="25">Low</Option>
+            <Option value="50">Medium</Option>
+            <Option value="75">High</Option>
+            <Option value="90">High+</Option>
+            <Option value="100">Maximum</Option>
+        </List>
+    </Field>
+
+
+    <Field id="label_describe_housemodes" type="label" 
+        alignWithControl="False">
+        <Label>House modes can diminish or amplify watchfulness as security expectations change.</Label>
+    </Field>
+
+    <Field id="sepHouseModes" type="separator" >
+    </Field>
+
+
+    <!-- ===================================================== -->
+    <!-- Observer -->
+    <!-- ===================================================== -->
+    
+    <Field id="createObserver"
+        type="checkbox"
+        defaultValue="false"
+        hidden="true">
+        <Label>Create Observer Device in Indigo Device List</Label>
+    </Field>
+
+    <Field id="observerName"
+        type="textfield"
+        visibleBindingId="createObserver"
+        visibleBindingValue="true"
+        hidden="true"
+        defaultValue="Securify Observer">
+        <Label>Observer Name</Label>
+    </Field>
+
+    <Field id="observerId"
+        type="textfield"
+        visibleBindingId="createObserver"
+        visibleBindingValue="true"
+        hidden="true">
+        <Label>Observer Id</Label>
+    </Field>
+
+    <Field id="label_describe_observer" type="label" 
+        hidden="true"
+        alignWithControl="false">
+        <Label>An observer device exposes Securify runtime states as read-only values. Choose this option to have the plugin create an Indigo device for this purpose.</Label>
+    </Field>
+
+    <Field id="sepObserver" type="separator" 
+            hidden="true">
+    </Field>
+
+    <!-- ===================================================== -->
+    <!-- ROOMIFY COOPERATION -->
+    <!-- ===================================================== -->
+
+    <Field id="roomifyCooperationEnabled"
+        type="checkbox"
+        defaultValue="false">
+        <Label>Cooperate with Roomify (if available)</Label>
+    </Field>
+
+
+    <!-- ===================================================== -->
+    <!-- LOGGING 1.0 -->
+    <!-- ===================================================== -->
+
+
+    <Field id="sep_logging" type="separator"/>
+
+
+    <Field id="loggingEnabled"
+        type="checkbox"
+        defaultValue="false">
+        <Label>LOGGING ENABLED:</Label>
+    </Field>
+
+    <!-- ===================================================== -->
+    <!-- LOGGING 2.0 -->
+    <!-- ===================================================== -->
+
+
+    <Field id="logCheckpoints"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Checkpoints: </Label>
+    </Field>
+
+    <Field id="logObservers"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Observers: </Label>
+    </Field>
+
+    <Field id="logResponses"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Responses: </Label>
+    </Field>
+
+    <Field id="logHeartbeats"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Heartbeats: </Label>
+    </Field>
+
+    <Field id="logErrors"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Errors: </Label>
+    </Field>
+
+    <Field id="logIntegrations"
+           type="checkbox"
+            visibleBindingId="loggingEnabled"
+            visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Integrations: </Label>
+    </Field>
+
+    <Field id="logOthers"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label> → Log Others: </Label>
+    </Field>
+
+
+    <Field id="label_describe_logging" type="label" 
+        alignWithControl="false">
+        <Label>Select desired logging detail..</Label>
+    </Field>
+
+
+    <Field id="sep_logging2.0" type="separator"/>
+
+
+    <Field id="verboseLogging"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label>Verbose Logging Enabled</Label>
+    </Field>
+
+    <Field id="heartbeatLogging"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label>Heartbeat Logging Enabled</Label>
+    </Field>
+
+    <Field id="deviceEventLogging"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="false">
+        <Label>Device Event Logging Enabled</Label>
+    </Field>
+
+    <Field id="errorLogging"
+           type="checkbox"
+        visibleBindingId="loggingEnabled"
+        visibleBindingValue="true"
+           defaultValue="true">
+        <Label>Error Logging Enabled</Label>
+    </Field>
+
+
+
+</PluginConfig>
