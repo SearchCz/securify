@@ -255,5 +255,7 @@ Brightness is therefore more than a simple indication of whether a condition exi
 Observers use this continuously changing assessment when determining whether a response should occur.
 
 Because Brightness is published as the state of an Indigo device, homeowners may also use it in their own Indigo triggers, conditions, and Action Groups, making it a powerful semantic indicator throughout their automation system.
+![](images/SecurifyLogo200.png)
 
-![[SecurifyLogo200.png]]
+### See Also:
+[Observer Overview](Observers.md)
