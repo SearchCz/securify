@@ -158,4 +158,7 @@ You decide how you wish to be informed.
 
 Securify continuously interprets the home’s condition so those decisions can be applied consistently, automatically, and intelligently.
 
-![](/docs/images/SecurifyLogo200.png)
+![](images/SecurifyLogo200.png)
+
+### See Also:
+[Watchfulness Configuration](Watchfulness.md)
