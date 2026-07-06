@@ -54,4 +54,4 @@ The result is a collection of independent plugins that can, when desired, work t
 
 *Roomify 1.3.x or higher required for plugin coordination*
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
