@@ -135,8 +135,10 @@ Each stage has a distinct responsibility.
 
 - Devices report facts.
 - Checkpoints interpret those facts.
-- Observers decide whether they deserve attention.
-- Responses inform the homeowner.
+- Observers
+  - recognize when checkpoints deserve attention
+  - determine when and whether they are authorized to respond
+  - initiate responses that may inform the homeowner.
 
 This separation of responsibilities keeps the system flexible, predictable, and easy to extend.
 
