@@ -111,3 +111,10 @@ Authority determines whether that condition is currently eligible to produce a r
 Response determines how the homeowner is informed.
 
 Together, these three responsibilities allow observers to remain simple, predictable, and highly reusable.
+
+
+![](images/SecurifyLogo200.png)
+
+### See Also:
+- [Observer Authority](Observer%20Authority.md)
+- [Observer Responses](Obserever%20Responses.md)
