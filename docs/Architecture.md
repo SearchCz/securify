@@ -181,4 +181,4 @@ Observers authorize.
 
 Responses inform.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
