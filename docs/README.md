@@ -137,4 +137,4 @@ Detailed documentation is available in the **docs** folder.
 ---
 
 
-![[SecurifyLogo200.png]]
+![](images/SecurifyLogo200.png)
