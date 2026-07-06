@@ -155,4 +155,4 @@ Authority determines when those conditions deserve to interrupt the homeowner.
 
 The result is a home that remains continuously aware while respecting the homeowner’s attention.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
