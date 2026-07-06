@@ -38,4 +38,4 @@ Observers use this continuously changing assessment when determining whether a r
 
 Because Brightness is published as the state of an Indigo device, homeowners may also use it in their own Indigo triggers, conditions, and Action Groups, making it a powerful semantic indicator throughout their automation system.
 
-![[SecurifyLogo200.png]]
+![](/docs/images/SecurifyLogo200.png)
