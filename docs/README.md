@@ -131,7 +131,7 @@ Detailed documentation is available in the **docs** folder.
 - [Observers](docs/Observer%20Overview.md)
 - [Observer Focus](docs/Observer%20Focus.md)
 - [Observer Authority](docs/Observer%20Authority.md)
-- [Observer Responses](docs/Obserever%20Responses.md)
+- [Observer Responses](docs/Observer%20Responses.md)
 - [Roomify Integration](docs/Roomify%20Integration.md)
 
 ---
