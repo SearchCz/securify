@@ -10,6 +10,10 @@ Securify determines **what deserves your attention**.
 
 Rather than treating every sensor equally, Securify continuously evaluates household conditions using homeowner-defined priorities, the home's current watchfulness, and the passage of time. The result is fewer meaningless notifications—and greater awareness of the conditions that actually matter.
 
+
+![](/docs/images/SecurifyGears.png)
+
+
 ---
 
 ## **Why Securify?**
@@ -67,9 +71,6 @@ A small water leak that has existed for two minutes may not matter.
 After an hour, it probably does.
 
 Securify continuously re-evaluates these conditions as your home's circumstances change.
-
-![](/docs/images/SecurifyExecutionLine.png)
-
 
 ---
 
@@ -155,6 +156,8 @@ It recognizes when your priorities indicate that a condition deserves attention 
 The homeowner decides.
 
 Securify watches.
+
+
 
 ---
 
