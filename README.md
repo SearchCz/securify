@@ -4,9 +4,41 @@
 
 **Awareness-driven home monitoring for Indigo Domotics**
 
+Most home automation systems know **what happened**.
+
+Securify determines **what deserves your attention**.
+
+Rather than treating every sensor equally, Securify continuously evaluates household conditions using homeowner-defined priorities, the home's current watchfulness, and the passage of time. The result is fewer meaningless notifications—and greater awareness of the conditions that actually matter.
+
+---
+
+## **Why Securify?**
+
+Securify doesn't compete with your alarm system. It occupies the space around it.
+
+Traditional alarm systems exist for emergencies.
+
+Securify exists for everything else that may deserve your awareness.
+
+An unlocked door at bedtime.
+
+A garage left open.
+
+A water leak that's been dripping for thirty minutes.
+
+Unexpected motion while the house should be empty.
+
+None of these situations necessarily requires an alarm. Their significance depends on context.
+
+Securify continuously interprets that context so the homeowner—not the automation—decides what deserves attention.
+
+---
+
+## **A Different Philosophy**
+
 A smart home should do more than react to devices.
 
-It should understand the priorities of the  people who live there, adapt to changing conditions in the home, and keep them aware of the conditions that matter.
+It should understand the people who live there, adapt to their priorities, and keep them aware of the conditions that matter.
 
 That philosophy places the homeowner—not the automation—at the center of the system.
 
@@ -18,72 +50,45 @@ Everything else follows from those principles.
 
 ---
 
-## **Why Securify?**
+## **How Securify Thinks**
 
-Traditional alarm systems are designed to detect emergencies.
+Instead of asking whether a sensor is simply *on* or *off*, Securify continually asks:
 
-Securify is designed to reveal conditions that deserve your attention—often long before they become emergencies.
+> **"How significant is this condition right now?"**
 
-An unlocked door at bedtime.
+That significance changes throughout the day.
 
-A garage left open.
+A door left unlocked at noon may be perfectly acceptable.
 
-A water leak that has persisted for thirty minutes.
+The same unlocked door at bedtime may deserve immediate attention.
 
-Unexpected motion while the home should be empty.
+A small water leak that has existed for two minutes may not matter.
 
-None of these situations necessarily requires an alarm, but each may warrant awareness depending on your priorities, the current state of your home, and how long the condition has persisted.
+After an hour, it probably does.
 
-Securify continuously interprets the home’s condition so that you can direct your attention where it is needed.
-
----
-
-## **Not an Alarm System**
-
-Securify doesn’t compete with your alarm system. It occupies the space around it.
-
-Your alarm system is there for the moments that demand an immediate response.
-
-Securify is there for the many other moments that deserve your awareness because of context, persistence, or homeowner-defined priorities.
-
-Rather than asking whether a sensor is simply _on_ or _off_, Securify continually evaluates what that state means.
+Securify continuously re-evaluates these conditions as your home's circumstances change.
 
 ---
 
-## **How It Works**
+## **Checkpoints**
 
-At the heart of Securify are two concepts.
+Checkpoints are where raw device signals become meaningful information.
 
-### **Checkpoints**
+A checkpoint combines one or more binary sensor states with:
 
-Checkpoints interpret one or more binary signals and determine their current significance.
+- Homeowner-defined importance
+- Current Watchfulness
+- Persistence over time
 
-A checkpoint considers:
+The result is a continuously changing **Brightness** score (0–100) that represents the current significance of the condition.
 
-- the importance assigned by the homeowner
-- the current watchfulness of the home
-- how long a condition has persisted
-
-The result is an evolving assessment of concern rather than a simple binary state.
-
-### **Observers**
-
-Observers watch for meaningful security conditions.
-
-When a condition of interest occurs—and any persistence or authorization requirements have been satisfied—an observer can respond by:
-
-- making an announcement
-- sending an email
-- delivering a Pushover notification
-- executing an Indigo Action Group
-- updating an Indigo Variable
-- repeating responses according to homeowner policy
+Rather than producing a simple *safe/not safe* result, checkpoints express how worthy of attention each condition has become.
 
 ---
 
 ## **Watchfulness**
 
-Every home experiences different levels of vulnerability throughout the day.
+Every home experiences changing levels of vulnerability.
 
 Securify models this using **Watchfulness**.
 
@@ -91,11 +96,34 @@ Watchfulness represents how alert the home should be under current circumstances
 
 For example:
 
-- Daytime at home may require relatively low watchfulness.
+- Home during the day may use relatively low watchfulness.
 - Bedtime may significantly increase watchfulness.
-- Away mode may represent the highest watchfulness.
+- Away mode may represent maximum watchfulness.
 
-As watchfulness changes, the same sensor condition may become more—or less—worthy of your attention.
+As Watchfulness changes, checkpoint Brightness changes automatically—even when the underlying sensor hasn't changed.
+
+---
+
+## **Observers**
+
+Observers watch for conditions the homeowner cares about.
+
+Each observer defines its own **Focus** by selecting the range of checkpoint Brightness values it considers important.
+
+Multiple observers can watch the same checkpoint simultaneously, each looking for different levels of concern and responding differently.
+
+When an observer's focus is satisfied—and any persistence or authorization requirements have been met—it activates and can:
+
+- Make announcements
+- Send email
+- Deliver Pushover notifications
+- Execute Indigo Action Groups
+- Update Indigo Variables
+- Repeat responses according to homeowner policy
+
+Observers don't decide what's important.
+
+They simply respond to the homeowner's definition of importance.
 
 ---
 
@@ -105,36 +133,43 @@ Roomify and Securify were designed together.
 
 Roomify helps the home understand how it should behave.
 
-Securify helps the homeowner understand when something deserves attention.
+Securify helps the homeowner understand what deserves attention.
 
-Together they create a home that both adapts to its occupants and raises awareness of conditions that matter.
+When both plugins are installed they share information—including House Mode and occupancy—allowing each plugin to make better decisions.
 
-Neither plugin depends on the other, but when both are installed they can cooperate by sharing information such as House Mode and occupancy, allowing each plugin to make better decisions.
+Neither plugin depends on the other.
 
 ---
+
 ## **Philosophy**
 
-Securify is built on a simple principle:
+Securify is an awareness engine.
 
-The homeowner—not the automation—decides what deserves attention.
+It doesn't decide what to do.
 
-Securify continuously interprets the home’s condition, quietly filters everyday noise, and reveals the situations that matter most.!
+It recognizes when your priorities indicate that a condition deserves attention and works to ensure you know about it.
+
+The homeowner decides.
+
+Securify watches.
 
 ---
+
 ## **Documentation**
 
 Detailed documentation is available in the **docs** folder.
 
 - [Overview](docs/Overview.md)
-- [Watchfulness Configuration](docs/Watchfulness.md)
-- [Checkpoints](docs/Watchfulness)
+- [Watchfulness](docs/Watchfulness.md)
+- [Checkpoints](docs/Checkpoints.md)
 - [Observers](docs/Observer%20Overview.md)
-  - [Observer Focus](docs/Observer%20Focus.md)
-  - [Observer Authority](docs/Observer%20Authority.md)
-  - [Observer Responses](docs/Obserever%20Responses.md)
+- [Observer Focus](docs/Observer%20Focus.md)
+- [Observer Authority](docs/Observer%20Authority.md)
+- [Observer Responses](docs/Observer%20Responses.md)
 - [Roomify Integration](docs/Roomify%20Integration.md)
 
 ---
 
+![](/docs/images/SecurifyLogo200.png)
 
 ![[SecurifyLogo200.png]]
