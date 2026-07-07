@@ -68,6 +68,9 @@ After an hour, it probably does.
 
 Securify continuously re-evaluates these conditions as your home's circumstances change.
 
+![](/docs/images/SecurifyExecutionLine.png)
+
+
 ---
 
 ## **Checkpoints**
