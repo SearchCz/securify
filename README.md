@@ -10,7 +10,18 @@ Securify determines **what deserves your attention**.
 
 Rather than treating every sensor equally, Securify continuously evaluates household conditions using homeowner-defined priorities, the home's current watchfulness, and the passage of time. The result is fewer meaningless notifications—and greater awareness of the conditions that actually matter.
 
-
+<figure style="text-align: center; margin: 2rem 0;">
+  <a href="/docs/images/SecurifyGears.png" target="_blank">
+    <img
+      src="/docs/images/SecurifyGears.png"
+      alt="Securify Awareness Engine"
+      style="max-width: 720px; width: 100%; height: auto;"
+    >
+  </a>
+  <figcaption style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+    Click image to view full size.
+  </figcaption>
+</figure>
 ![](/docs/images/SecurifyGears.png)
 
 
