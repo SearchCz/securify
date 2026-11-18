@@ -37,6 +37,12 @@ class Plugin(indigo.PluginBase):
 
         compromisedCheckpoints = []
 
+        #2026/10/3
+        self.logger.debug(f"getCompromisedCheckpoints called with classification: {classification}")
+
+        if classification == "allclear":
+            return compromisedCheckpoints
+
         for checkpointId, checkpoint in self.checkpoints.items():
 
             # Skip the summary record
@@ -56,9 +62,10 @@ class Plugin(indigo.PluginBase):
         lines = []
 
         lines.append(f"Exposure Index: {alertScore}")
-        lines.append(f"Classification: {classification.title()}")
+        #lines.append(f"Classification: {classification.title()}")
         lines.append("")
-        lines.append("Compromised checkpoints:")
+    
+        lines.append("Relevant checkpoints:")
 
         if not compromisedCheckpoints:
             lines.append("- None reported.")
@@ -141,7 +148,7 @@ class Plugin(indigo.PluginBase):
         exposureMessages = {
             "allclear": (
                 ["reports", "indicates", "confirms"],
-                "all monitored security concerns have been resolved."
+                "all monitored devices are secure."
             ),
 
             "normal": (
@@ -180,7 +187,7 @@ class Plugin(indigo.PluginBase):
         if alertScore is None:
             return f"{observerName} {verb} {message}"
 
-        return f"{preamble} {observerName} {verb} {message} (Exposure: {classification})"
+        return f"{preamble} {observerName} {verb} {message} (Status {classification})"
 
 
     def getExposureClassification(self, alertScore):
@@ -480,7 +487,15 @@ class Plugin(indigo.PluginBase):
             iteration,
             max)
 
-        compromisedCheckpoints = self.getCompromisedCheckpoints(summary.get("alertClassificationUI", ""))
+#        compromisedCheckpoints = self.getCompromisedCheckpoints(summary.get("alertClassificationUI", ""))
+
+        classification = summary.get("alertClassificationUI", "")
+        if classification != "Allclear":
+            compromisedCheckpoints = (
+            self.getCompromisedCheckpoints(classification))
+        else:
+            compromisedCheckpoints = []
+
         body = self.getExposureBody(
             summary.get("alertClassificationUI", ""),
             summary.get("alertScore", 0),
@@ -620,9 +635,10 @@ class Plugin(indigo.PluginBase):
 
     # runs when plugin loads. good for initializing variables, loading prefs, etc. but not for doing anything with devices since they might not be loaded yet (that's deviceStartComm)
     def startup(self):
+        self.indicatorCheckpointIndex = {}
         self.suspendCrossTalk = False
         self.observers = {}
-        self.checkpoinmts = {}
+        self.checkpoints = {}
         self.lastreport = {}
         self.vulnerabilityCount = 0
         self.breachCount = 0
@@ -639,6 +655,7 @@ class Plugin(indigo.PluginBase):
         self.initializeObserverDict()
         self.initializeCheckpointDict()
         self.buildIndicatorCheckpointIndex()
+        self.logIt(f"Indicator checkpoint index built: {len(self.indicatorCheckpointIndex)} entries")        
         self.evaluateAllCheckpoints()
         self.updateHouseCheckpoint()
 
@@ -889,7 +906,7 @@ class Plugin(indigo.PluginBase):
 
     def evaluateAllCheckpoints(self):
         self.logCheckpoint("Evaluating All Checkpoints")
-        checkpoints = indigo.devices.iter("self.securifyCheckpoint")
+        checkpoints = indigo.devices.iter("securifyCheckpoint")
         for checkpoint in checkpoints:
             self.evaluateCheckpoint(checkpoint)        
         self.reEvaluateAllCheckpoints()
@@ -920,7 +937,7 @@ class Plugin(indigo.PluginBase):
         self.vulnerabilityMax = 0
         self.alertMax = 0
 
-        checkpoints = indigo.devices.iter("self.securifyCheckpoint")
+        checkpoints = indigo.devices.iter("securifyCheckpoint")
         for checkpoint in checkpoints:
             self.reEvaluateCheckpoint(checkpoint)
 
@@ -1174,7 +1191,11 @@ class Plugin(indigo.PluginBase):
 
     def buildIndicatorCheckpointIndex(self):
         self.indicatorCheckpointIndex = {}
-        for checkpoint in indigo.devices.iter("self.securifyCheckpoint"):
+        for checkpoint in indigo.devices:
+            if checkpoint.deviceTypeId != "securifyCheckpoint":
+                continue
+
+#            self.logIt(f"Found checkpoint: {checkpoint.name} ({checkpoint.deviceTypeId})")
             checkpointType = checkpoint.pluginProps.get("checkpointType")
 
             if checkpointType == "OCCUPANCY":
@@ -1234,6 +1255,7 @@ class Plugin(indigo.PluginBase):
 
 
     #heartbeat
+
     def runConcurrentThread(self):
 
         self.logHeartbeat("Securify heartbeat thread started")
@@ -1241,35 +1263,43 @@ class Plugin(indigo.PluginBase):
         try:
             while True:
 
-                #now = time.time()
+                try:
+                    if not self.configStable:
+                        self.configStable = True
+                        if self.configChangedDeviceId:
+                            checkpoint = indigo.devices[self.configChangedDeviceId]
+                            self.evaluateCheckpoint(checkpoint)
+                            self.updateHouseCheckpoint()
+                        else:
+                            self.loadPluginPrefs()
 
-                if not self.configStable:
-                    self.configStable = True
-                    if self.configChangedDeviceId:
-                        checkpoint = indigo.devices[self.configChangedDeviceId]
-                        self.evaluateCheckpoint(checkpoint)
-                        self.updateHouseCheckpoint()
-                    else:
-                        self.loadPluginPrefs()
+                    self.logHeartbeat("Securify Heartbeat")
 
-                self.logHeartbeat("Securify Heartbeat")
+                    self.logHeartbeat("*** ESCALATING VULNERABLE CHECKPOINTS ***")
+                    self.escalateVulnerableCheckpoints()
 
-                self.logHeartbeat("*** ESCALATING VULNERABLE CHECKPOINTS ***")
-                self.escalateVulnerableCheckpoints()
-                self.logHeartbeat("*** RE-EVALUATING ALL CHECKPOINTS ***")
-                self.reEvaluateAllCheckpoints()
-                self.logHeartbeat("*** UPDATING HOUSE CHECKPOINT ***")
-                self.updateHouseCheckpoint()   
-                self.logHeartbeat("*** PROCESSING OBSEVERS FOR HOUSE ***")
-                self.processObserversForCheckpoint(0,self.alertMax, self.vulnerabilityMax)
-                #is this necessary?
-                self.logHeartbeat("*** REPROCESSING ACTIVE OBSERVERS ***")
-                self.reprocessActiveObservers()
+                    self.logHeartbeat("*** RE-EVALUATING ALL CHECKPOINTS ***")
+                    self.reEvaluateAllCheckpoints()
 
-                self.sleep(60)                 
+                    self.logHeartbeat("*** UPDATING HOUSE CHECKPOINT ***")
+                    self.updateHouseCheckpoint()
+
+                    self.logHeartbeat("*** PROCESSING OBSERVERS FOR HOUSE ***")
+                    self.processObserversForCheckpoint(
+                        0, self.alertMax, self.vulnerabilityMax
+                    )
+
+                    self.logHeartbeat("*** REPROCESSING ACTIVE OBSERVERS ***")
+                    self.reprocessActiveObservers()
+
+                except Exception:
+                    self.logger.exception("Exception during Securify heartbeat")
+
+                self.sleep(60)
 
         except self.StopThread:
             self.logger.info("Securify heartbeat thread stopped")
+
 
 #------------------------------------------DEBUGGING CODE SNIPPETS BELOW -----------------------------#
     def escalateVulnerableCheckpoints(self):
@@ -1441,6 +1471,29 @@ class Plugin(indigo.PluginBase):
 
         #self.evaluateExposureChange(self.checkpoints[checkpointId])
 
+    def getHouse(self):
+        house = self.checkpoints.get(0)
+        if house is None:
+            house = self.initHouse()
+        return house
+
+    def initHouse(self):
+        house = self.checkpoints.get(0)
+        if house is None:
+            house = {
+                "id": 0,
+                "name": "House",
+                "alertScore": 0,
+                "alertClassification": 0,
+                "alertClassificationUI": "allclear",
+                "alertScoreDelta": 0,
+                "alertClassDelta": 0,
+                "highestCheckpointId": 0,
+                "highestCheckpointName": "",
+            }
+            self.checkpoints[0] = house
+        return house
+
 
     def updateHouseCheckpoint(self):
 
@@ -1471,7 +1524,7 @@ class Plugin(indigo.PluginBase):
                 highestCheckpointName = checkpoint.get("name", "")  
 
         #store
-        house = self.checkpoints[0]
+        house = self.getHouse()
 
         previousScore = int(house.get("alertScore", 0) or 0)
         previousClass = int(house.get("alertClassification", 0) or 0)
@@ -1773,7 +1826,7 @@ class Plugin(indigo.PluginBase):
             "escalationRate": 0,
             "vulnerabilityScore": 0}
 
-        for checkpoint in indigo.devices.iter("self.securifyCheckpoint"):
+        for checkpoint in indigo.devices.iter("securifyCheckpoint"):
             #cache everything needed to determine checkpoint exposure
             #without referring to the device itself
             self.cacheCheckpoint(checkpoint)
